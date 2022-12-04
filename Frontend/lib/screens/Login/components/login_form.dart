@@ -15,6 +15,7 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
+
   Map userData = {"email": "", "password": ""};
 
   EventController controller = Get.put(EventController());

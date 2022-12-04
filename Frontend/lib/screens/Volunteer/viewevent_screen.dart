@@ -1,3 +1,4 @@
+import 'package:eandv/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:eandv/controller/event_controller.dart';
 import 'package:get/get.dart';
@@ -7,11 +8,11 @@ class ViewEventScreen extends StatelessWidget {
 
   final EventController controller = Get.put(EventController());
 
-  signOut() async {
-    await auth.signOut();
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => LoginScreen()));
-  }
+  // signOut() async {
+  //   await auth.signOut();
+  //   Navigator.pushReplacement(
+  //       context, MaterialPageRoute(builder: (context) => LoginScreen()));
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +20,6 @@ class ViewEventScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Event List'),
-        
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          signOut();
-        },
-        child: Icon(Icons.logout_rounded),
-        backgroundColor: Colors.green,
       ),
       body: GetBuilder<EventController>(
         builder: (controller) => controller.allEvent.isEmpty

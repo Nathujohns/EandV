@@ -3,6 +3,8 @@ import 'package:eandv/screens/Volunteer/viewevent_screen.dart';
 import 'package:eandv/controller/event_controller.dart';
 import 'package:get/get.dart';
 
+import '../profile.dart';
+
 class VolunteerHomeScreen extends StatelessWidget {
   VolunteerHomeScreen({Key? key}) : super(key: key);
 
@@ -14,6 +16,19 @@ class VolunteerHomeScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
+          actions: [
+            IconButton(
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                // do something
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const Profile()));
+              },
+            )
+          ],
           automaticallyImplyLeading: false,
           title: const Text('EandV'),
         ),
