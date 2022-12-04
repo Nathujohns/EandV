@@ -16,20 +16,6 @@ class VolunteerHomeScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          actions: [
-            IconButton(
-              icon: const Icon(
-                Icons.person,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                // do something
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Profile()));
-              },
-            )
-          ],
-          automaticallyImplyLeading: false,
           title: const Text('EandV'),
         ),
         body: Column(
