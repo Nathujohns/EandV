@@ -14,7 +14,7 @@ class WelcomeImage extends StatelessWidget {
       children: [
         const Text(
           "Welcome To EandV",
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
         ),
         const SizedBox(height: defaultPadding * 2),
         Row(

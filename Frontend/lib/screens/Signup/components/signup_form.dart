@@ -1,5 +1,6 @@
 import 'package:eandv/controller/event_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../../components/already_have_an_account_acheck.dart';
 import '../../../constants.dart';
@@ -15,9 +16,17 @@ class SignUpForm extends StatefulWidget {
 
 class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
-  Map userData = {"cpr": "", "name": "", "email": "", "password": ""};
+  Map userData = {
+    "cpr": "",
+    "name": "",
+    "email": "",
+    "password": "",
+    "role": ""
+  };
 
   EventController controller = Get.put(EventController());
+
+  String? list = null;
 
   addUser() {
     _formKey.currentState!.save();
@@ -33,6 +42,9 @@ class _SignUpFormState extends State<SignUpForm> {
       child: Column(
         children: [
           TextFormField(
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(9),
+            ],
             keyboardType: TextInputType.number,
             textInputAction: TextInputAction.next,
             cursorColor: kPrimaryColor,
@@ -106,7 +118,9 @@ class _SignUpFormState extends State<SignUpForm> {
 
           const SizedBox(height: defaultPadding / 2),
           TextFormField(
-            keyboardType: TextInputType.emailAddress,
+            obscureText: true,
+            enableSuggestions: false,
+            autocorrect: false,
             textInputAction: TextInputAction.next,
             cursorColor: kPrimaryColor,
             onSaved: (value) {
@@ -125,6 +139,37 @@ class _SignUpFormState extends State<SignUpForm> {
                 child: Icon(Icons.lock),
               ),
             ),
+          ),
+          const SizedBox(height: defaultPadding / 2),
+          DropdownButtonFormField<String>(
+            decoration: const InputDecoration(
+              prefixIcon: Icon(Icons.key_rounded),
+            ),
+            hint: const Text("Select Your User Role"),
+            value: list,
+            icon: const Icon(Icons.arrow_downward),
+            elevation: 16,
+            isExpanded: true,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Role is required';
+              }
+              return null;
+            },
+            style: const TextStyle(color: Colors.deepPurple),
+            onChanged: (String? value) {
+              // This is called when the user selects an item.
+              setState(() {
+                list = value!;
+                userData['role'] = value;
+              });
+            },
+            items: <String>['Organizer', 'Volunteer']
+                .map((String val) => DropdownMenuItem<String>(
+                      value: val,
+                      child: Text(val),
+                    ))
+                .toList(),
           ),
           const SizedBox(height: defaultPadding / 2),
           const SizedBox(height: defaultPadding / 2),

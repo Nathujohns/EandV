@@ -16,6 +16,7 @@ router.post("/addUser", async(req, res) => {
         newUser.email = lowerCaseUserName;
         const hashedPassword = bcrypt.hashSync(req.body.password, 10)
         newUser.password = hashedPassword
+        newUser.role = req.body.role
   
         await newUser.save()
         .then(async (volunteer) => {
