@@ -90,8 +90,9 @@ class EventController extends GetxController {
 
       if (response.statusCode == 200) {
         toast("You've successfully logged in ✅");
+        var jsonResponse = jsonDecode(response.body);
 
-        if (response.body == "Organizer") {
+        if (jsonResponse['role'] == "Organizer") {
           Get.to(OrganizerHomeScreen());
         } else {
           Get.to(VolunteerHomeScreen());

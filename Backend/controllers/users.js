@@ -45,7 +45,7 @@ router.post("/loginUser", async(req, res) => {
         const encryptedUserIdString = encryptedUserId.toString()
         res.cookie('userId', encryptedUserIdString)
         res.cookie('userID' , user.id)
-        res.send(user.role)
+        res.send(user)
     }
 })
 
