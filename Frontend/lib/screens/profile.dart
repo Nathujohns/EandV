@@ -1,4 +1,6 @@
+import 'package:eandv/screens/Login/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -66,6 +68,14 @@ class _ProfileState extends State<Profile> {
                 onPressed: () {},
                 child: Row(
                   children: const [
+                    Icon(Icons.person),
+                    //   children: [
+                    //   SvgPicture.asset(
+                    //   icon,
+                    //   color: kPrimaryColor,
+                    //   width: 22,
+                    // ),
+                    SizedBox(width: 20),
                     Expanded(child: Text("My Account")),
                     Icon(Icons.arrow_forward_ios),
                   ],
@@ -83,6 +93,8 @@ class _ProfileState extends State<Profile> {
                 onPressed: () {},
                 child: Row(
                   children: const [
+                    Icon(Icons.notifications),
+                    SizedBox(width: 20),
                     // SvgPicture.asset(
                     //   icon,
                     //   color: kPrimaryColor,
@@ -107,6 +119,8 @@ class _ProfileState extends State<Profile> {
                 onPressed: () {},
                 child: Row(
                   children: const [
+                    Icon(Icons.settings),
+                    SizedBox(width: 20),
                     // SvgPicture.asset(
                     //   icon,
                     //   color: kPrimaryColor,
@@ -131,6 +145,8 @@ class _ProfileState extends State<Profile> {
                 onPressed: () {},
                 child: Row(
                   children: const [
+                    Icon(Icons.help_center),
+                    SizedBox(width: 20),
                     // SvgPicture.asset(
                     //   icon,
                     //   color: kPrimaryColor,
@@ -152,9 +168,20 @@ class _ProfileState extends State<Profile> {
                       borderRadius: BorderRadius.circular(15)),
                   backgroundColor: Color(0xFFF5F6F9),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  SharedPreferences shared_User =
+                      await SharedPreferences.getInstance();
+                  String Login = '';
+                  shared_User.setString('login', Login);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()));
+                },
                 child: Row(
                   children: const [
+                    Icon(Icons.logout),
+                    SizedBox(width: 20),
                     // SvgPicture.asset(
                     //   icon,
                     //   color: kPrimaryColor,

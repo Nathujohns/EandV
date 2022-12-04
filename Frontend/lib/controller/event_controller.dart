@@ -5,7 +5,9 @@ import 'package:eandv/screens/Welcome/welcome_screen.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:eandv/utilities/toast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../model/login_model.dart';
 import '../screens/Volunteer/volunteer_home_screen.dart';
 
 class EventController extends GetxController {
@@ -27,6 +29,36 @@ class EventController extends GetxController {
     } catch (error) {
       toastError(error.toString());
     }
+  }
+
+  // Future<void> savelogiin(var response) async {
+  //   SharedPreferences shared_User = await SharedPreferences.getInstance();
+  // }
+
+  Future<void> saveLogin(var response) async {
+    SharedPreferences shared_User = await SharedPreferences.getInstance();
+    Login_model _auth = Login_model.fromJson(jsonDecode(response));
+    String login = jsonEncode(_auth);
+    print(login);
+    shared_User.setString('login', login);
+  }
+
+  Future<void> getLogin() async {
+    SharedPreferences shared_User = await SharedPreferences.getInstance();
+    String? login = shared_User.getString('login');
+    if (login == '') {
+      print("User not logged out");
+      return;
+    }
+    var user = Login_model.fromJson(jsonDecode(login!));
+    print(user.id);
+  }
+
+  Future<void> LogOut() async {
+    SharedPreferences shared_User = await SharedPreferences.getInstance();
+    String login = '';
+    print(login);
+    shared_User.setString('login', login);
   }
 
   Future<void> addUser(Map userData) async {
