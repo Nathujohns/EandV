@@ -7,12 +7,26 @@ class ViewEventScreen extends StatelessWidget {
 
   final EventController controller = Get.put(EventController());
 
+  signOut() async {
+    await auth.signOut();
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => LoginScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     controller.getEvent();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Event List'),
+        
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          signOut();
+        },
+        child: Icon(Icons.logout_rounded),
+        backgroundColor: Colors.green,
       ),
       body: GetBuilder<EventController>(
         builder: (controller) => controller.allEvent.isEmpty
