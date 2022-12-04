@@ -3,6 +3,8 @@ import 'package:eandv/controller/event_controller.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../constants.dart';
+
 class AddEventScreen extends StatefulWidget {
   const AddEventScreen({Key? key}) : super(key: key);
 
@@ -58,6 +60,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   return null;
                 },
               ),
+              const SizedBox(height: defaultPadding / 2),
               TextFormField(
                 decoration: const InputDecoration(
                   label: Text('Event Description'),
@@ -72,6 +75,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   return null;
                 },
               ),
+              const SizedBox(height: defaultPadding / 2),
               TextFormField(
                 controller:
                     dateController, //editing controller of this TextField
