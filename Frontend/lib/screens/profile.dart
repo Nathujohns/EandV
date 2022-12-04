@@ -1,3 +1,4 @@
+import 'package:eandv/Editprofile.dart';
 import 'package:eandv/screens/Login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -57,6 +58,10 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               const SizedBox(height: 20),
+              const Text("Ibtisam Ali"),
+              const SizedBox(height: 10),
+              const Text("Ibtisamali826@gmail.com"),
+              const SizedBox(height: 20),
               TextButton(
                 style: TextButton.styleFrom(
                   // primary: kPrimaryColor,
@@ -65,7 +70,12 @@ class _ProfileState extends State<Profile> {
                       borderRadius: BorderRadius.circular(15)),
                   backgroundColor: Color(0xFFF5F6F9),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const EditProfile()));
+                },
                 child: Row(
                   children: const [
                     Icon(Icons.person),

@@ -14,6 +14,7 @@ class EventController extends GetxController {
   static const apiBaseUrl = 'http://localhost:3000/';
 
   List<EventModel> allEvent = [];
+  List<Login_model> LoginDetails = [];
 
   Future<void> addEvent(Map eventData) async {
     var url = Uri.parse('${apiBaseUrl}organizer/addevent');
@@ -106,14 +107,20 @@ class EventController extends GetxController {
   }
 
   getUser() async {
+    LoginDetails = [];
     var url = Uri.parse('${apiBaseUrl}users/getUser');
+    List<Login_model> helperList = [];
     try {
       final response =
           await http.get(url, headers: {"Content-Type": "application/json"});
 
       if (response.statusCode == 200) {
+        helperList.addAll(List<Login_model>.from(
+            json.decode(response.body).map((x) => Login_model().toJson())));
         // print(response.body);
       }
+      LoginDetails.addAll(helperList);
+      update();
     } catch (error) {
       toastError(error.toString());
     }
