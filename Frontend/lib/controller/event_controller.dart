@@ -59,7 +59,7 @@ class EventController extends GetxController {
       if (response.statusCode == 200) {
         toast("You've successfully logged in ✅");
 
-        if (response.body == "organizer") {
+        if (response.body == "Organizer") {
           Get.to(OrganizerHomeScreen());
         } else {
           Get.to(VolunteerHomeScreen());
