@@ -1,7 +1,12 @@
 import 'package:eandv/Editprofile.dart';
+import 'package:eandv/model/login_model.dart';
 import 'package:eandv/screens/Login/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../controller/event_controller.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -11,6 +16,21 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  final EventController controller = Get.find();
+  Login_model model = Login_model();
+
+  @override
+  void initState() {
+    GetloginData();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  GetloginData() async {
+    model = await controller.getLogin();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,9 +78,9 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               const SizedBox(height: 20),
-              const Text("Ibtisam Ali"),
+              Text(model.name.toString()),
               const SizedBox(height: 10),
-              const Text("Ibtisamali826@gmail.com"),
+              Text(model.email.toString()),
               const SizedBox(height: 20),
               TextButton(
                 style: TextButton.styleFrom(

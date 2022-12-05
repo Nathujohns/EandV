@@ -29,16 +29,16 @@ app.use(
   })
 );
 
-// app.use(async (req, res, next)=>{
-//   if(req.cookies.userId) {
-//       const decryptedId = cryptoJS.AES.decrypt(req.cookies.userId, process.env.SECRET)
-//       const decryptedIdString = decryptedId.toString(cryptoJS.enc.Utf8)
-//       const user = await db.user.findByPk(decryptedIdString)
-//       res.locals.user = user;
-//       res.locals.userId = user.id;
-//   } else res.locals.user = null
-//   next()
-// })
+//app.use(async (req, res, next)=>{
+//  if(req.cookies.userId) {
+//      const decryptedId = cryptoJS.AES.decrypt(req.cookies.userId, process.env.SECRET)
+//      const decryptedIdString = decryptedId.toString(cryptoJS.enc.Utf8)
+//      const user = await db.user.findByPk(decryptedIdString)
+//      res.locals.user = user;
+//      res.locals.userId = user.id;
+//  } else res.locals.user = null
+//  next()
+//})
 
 
 

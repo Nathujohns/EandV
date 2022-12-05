@@ -82,7 +82,7 @@ class _SignInScreenState extends State<SignInScreen> {
           Hero(
             tag: "login_btn",
             child: ElevatedButton(
-              onPressed: loginUser,
+              onPressed: () => loginUser(),
               child: const Text("LOGIN"),
             ),
           ),

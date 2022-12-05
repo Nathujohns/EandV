@@ -43,16 +43,17 @@ class EventController extends GetxController {
     shared_User.setString('login', login);
   }
 
-  Future<void> getLogin() async {
+  Future<Login_model> getLogin() async {
     SharedPreferences shared_User = await SharedPreferences.getInstance();
-    print(shared_User);
+    // print(shared_User);
     String? login = shared_User.getString('login');
     if (login == '') {
-      print("User not logged out");
-      return;
+      print("User not logged In");
+      return Login_model();
     }
     var user = Login_model.fromJson(jsonDecode(login!));
-    print(user.id);
+    print(user.cpr);
+    return user;
   }
 
   Future<void> LogOut() async {
@@ -83,7 +84,7 @@ class EventController extends GetxController {
 
   Future<void> loginUser(Map userData) async {
     // print("add event data $eventData");
-
+    final EventController controller = Get.put(EventController());
     var url = Uri.parse('${apiBaseUrl}users/loginUser');
 
     try {
@@ -92,6 +93,9 @@ class EventController extends GetxController {
       if (response.statusCode == 200) {
         toast("You've successfully logged in ✅");
         var jsonResponse = jsonDecode(response.body);
+        // print(response.body);
+        // Login_model.fromJson(jsonDecode(response.body));
+        controller.saveLogin(response.body);
 
         if (jsonResponse['role'] == "Organizer") {
           Get.to(OrganizerHomeScreen());

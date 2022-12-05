@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import 'constants.dart';
 import 'controller/event_controller.dart';
+import 'model/login_model.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
@@ -14,10 +15,20 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-  final _formKey = GlobalKey<FormState>();
-  Map eventData = {"title": "", "description": ""};
+  final EventController controller = Get.find();
+  Login_model model = Login_model();
 
-  EventController controller = Get.put(EventController());
+  @override
+  void initState() {
+    GetloginData();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  GetloginData() async {
+    model = await controller.getLogin();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +37,19 @@ class _EditProfileState extends State<EditProfile> {
         title: const Text('Edit Profile'),
       ),
       body: Form(
-        key: _formKey,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               TextFormField(
-                  decoration: const InputDecoration(
-                hintText: 'Ibtisam',
+                  decoration: InputDecoration(
+                hintText: model.name,
               )),
               const SizedBox(height: defaultPadding / 2),
-              const TextField(
+              TextField(
                 decoration: InputDecoration(
-                  hintText: ('Email'),
+                  hintText: model.email,
                 ),
               ),
               const SizedBox(height: defaultPadding / 2),

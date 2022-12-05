@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:eandv/screens/Volunteer/viewevent_screen.dart';
 import 'package:eandv/controller/event_controller.dart';
@@ -32,6 +33,22 @@ class VolunteerHomeScreen extends StatelessWidget {
           ],
           title: const Text('EandV'),
         ),
+        // bottomNavigationBar: CurvedNavigationBar(
+        //   backgroundColor: Colors.deepOrange,
+        //   animationDuration: Duration(milliseconds: 300),
+        //   // onTap: () {},
+        //   items: const [
+        //     Icon(
+        //       Icons.home,
+        //       color: Colors.white,
+        //     ),
+        //     Icon(
+        //       Icons.add,
+        //       color: Colors.white,
+        //     ),
+        //     Icon(Icons.settings, color: Colors.white)
+        //   ],
+        // ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -44,6 +61,32 @@ class VolunteerHomeScreen extends StatelessWidget {
                 Get.to(() => ViewEventScreen());
               },
               child: const Text("View Events"),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 200,
+                      child: ListView.builder(
+                          itemCount: 10,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) => Container(
+                                color: Colors.grey,
+                                height: 100,
+                                width: 100,
+                                margin: const EdgeInsets.all(10),
+                                child: const Center(
+                                  child: Text("Events"),
+                                ),
+                              )),
+                    ),
+                  ],
+                ),
+              ),
             )
           ],
         ));
