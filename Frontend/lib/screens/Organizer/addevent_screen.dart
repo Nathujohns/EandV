@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:eandv/controller/event_controller.dart';
@@ -6,6 +7,9 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../constants.dart';
 import 'package:eandv/utilities/fieldvalidations.dart';
+import 'package:image_picker/image_picker.dart';
+
+import 'ImageFromGalleryEx.dart';
 
 class AddEventScreen extends StatefulWidget {
   const AddEventScreen({Key? key}) : super(key: key);
@@ -88,8 +92,8 @@ class _AddEventScreenState extends State<AddEventScreen> {
               const SizedBox(height: defaultPadding / 2),
 
               TextFormField(
-                // keyboardType: TextInputType.number,
-                // textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(
                   label: Text('Required Volunteers'),
                 ),
@@ -152,6 +156,16 @@ class _AddEventScreenState extends State<AddEventScreen> {
               const SizedBox(
                 height: 20,
               ),
+
+              ElevatedButton(
+                child: const Text("Pick Image from Gallery"),
+                onPressed: () {
+                  _handleURLButtonPress(context, ImageSourceType.gallery);
+                },
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               ElevatedButton(onPressed: addEvent, child: const Text("SUBMIT"))
               // Add TextFormFields and ElevatedButton here.
             ],
@@ -160,4 +174,92 @@ class _AddEventScreenState extends State<AddEventScreen> {
       ),
     );
   }
+}
+
+class ImageFromGalleryEx extends StatefulWidget {
+  final type;
+  const ImageFromGalleryEx(this.type, {super.key});
+
+  @override
+  ImageFromGalleryExState createState() => ImageFromGalleryExState(this.type);
+}
+
+class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
+  var _image;
+  var imagePicker;
+  var type;
+
+  ImageFromGalleryExState(this.type);
+
+  get eventData => null;
+
+  @override
+  void initState() {
+    super.initState();
+    imagePicker = new ImagePicker();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+          title: Text(type == ImageSourceType.camera
+              ? "Image from Camera"
+              : "Image from Gallery")),
+      body: Column(
+        children: <Widget>[
+          const SizedBox(
+            height: 52,
+          ),
+          Center(
+            child: GestureDetector(
+              onTap: () async {
+                var source = type == ImageSourceType.camera
+                    ? ImageSource.camera
+                    : ImageSource.gallery;
+                XFile image = await imagePicker.pickImage(
+                    source: source,
+                    imageQuality: 50,
+                    preferredCameraDevice: CameraDevice.front);
+                setState(() {
+                  _image = File(image.path);
+                  print(_image);
+                });
+              },
+              child: Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(color: Colors.red[200]),
+                child: _image != null
+                    ? Image.file(
+                        _image,
+                        width: 200.0,
+                        height: 200.0,
+                        fit: BoxFit.fitHeight,
+                      )
+                    : Container(
+                        decoration: BoxDecoration(color: Colors.red[200]),
+                        width: 200,
+                        height: 200,
+                        child: Icon(
+                          Icons.camera_alt,
+                          color: Colors.grey[800],
+                        ),
+                      ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+enum ImageSourceType { gallery, camera }
+
+ImagePicker picker = ImagePicker();
+
+void _handleURLButtonPress(BuildContext context, var type) {
+  Navigator.push(context,
+      MaterialPageRoute(builder: (context) => ImageFromGalleryEx(type)));
 }

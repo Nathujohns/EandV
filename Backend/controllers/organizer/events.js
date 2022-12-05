@@ -69,32 +69,14 @@ router.post('/status' ,async(req, res) => {
       });
   })
     
-router.delete('/:requestId', async (req,res) => {
+router.delete('/:eventId', async (req,res) => {
   
-  
-   await db.order.destroy({
-        where: { id: req.params.orderId }
-    }).then(r => {
-      
-      
-          req.flash('success', 'Order deleted successfully!!!')
-  
+   await db.event.destroy({
+        where: { id: req.params.eventId }
+    }).then(r => {  
+          res.send('Event deleted successfully!!!')
          
-      db.order.findAll({
-        where: {
-          status: {[sequelize.Op.not]: 'completed'}
-        },
-        order: [['createdAt', 'DESC']],
-        include: [db.user]
-      }).then((orders) => {
-      
-        res.render('restaurant/orders' , {orders})
-  
-      });
-      
-  
-      
-    });
+     });
   })
    
 

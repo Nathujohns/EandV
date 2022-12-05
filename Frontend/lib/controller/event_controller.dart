@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:eandv/model/event_model.dart';
 import 'package:eandv/screens/Organizer/organizer_home_screen.dart';
+import 'package:eandv/screens/Volunteer/viewevent_screen.dart';
 import 'package:eandv/screens/Welcome/welcome_screen.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -23,6 +24,45 @@ class EventController extends GetxController {
       if (response.statusCode == 200) {
         toast("Event added successfully ✅");
         Get.back();
+      } else {
+        toastError(response.body);
+      }
+    } catch (error) {
+      toastError(error.toString());
+    }
+  }
+
+  Future<void> editEvent(Map eventData) async {
+    var url = Uri.parse('${apiBaseUrl}organizer/addevent');
+    try {
+      final response = await http.post(url, body: eventData);
+      if (response.statusCode == 200) {
+        toast("Event added successfully ✅");
+        Get.back();
+      } else {
+        toastError(response.body);
+      }
+    } catch (error) {
+      toastError(error.toString());
+    }
+  }
+
+  Future<void> deleteEvent(String id) async {
+    try {
+      final response = await http.delete(
+        Uri.parse('${apiBaseUrl}organizer/$id'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+      if (response.statusCode == 200) {
+        // var url = Uri.parse('${apiBaseUrl}organizer/getEvent');
+
+        // final response =
+        //   await http.get(url, headers: {"Content-Type": "application/json"});
+
+        toast("Event deleted successfully ❌");
+        Get.to(ViewEventScreen());
       } else {
         toastError(response.body);
       }
