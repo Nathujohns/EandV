@@ -50,12 +50,20 @@ router.post("/loginUser", async(req, res) => {
 })
 
 
-router.get("/getUser", async(req, res) => {
+router.get("/getUser", async(req, res,next) => {
+
+  // res.send(req.cookies.userId)
+  
+  // res.send(res.locals.user);
+  
+  // res.locals.session = req.session
+  // res.locals.user = req.user
+  // next()
 
   const user = await db.user.findAll({})
 
   res.status(200).send({
-    allusers: user,
+    allUsers: user,
   });
 
 })

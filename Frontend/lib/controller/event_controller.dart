@@ -18,7 +18,6 @@ class EventController extends GetxController {
 
   Future<void> addEvent(Map eventData) async {
     var url = Uri.parse('${apiBaseUrl}organizer/addevent');
-
     try {
       final response = await http.post(url, body: eventData);
       if (response.statusCode == 200) {
@@ -46,6 +45,7 @@ class EventController extends GetxController {
 
   Future<void> getLogin() async {
     SharedPreferences shared_User = await SharedPreferences.getInstance();
+    print(shared_User);
     String? login = shared_User.getString('login');
     if (login == '') {
       print("User not logged out");
@@ -115,8 +115,6 @@ class EventController extends GetxController {
           await http.get(url, headers: {"Content-Type": "application/json"});
 
       if (response.statusCode == 200) {
-        helperList.addAll(List<Login_model>.from(
-            json.decode(response.body).map((x) => Login_model().toJson())));
         // print(response.body);
       }
       LoginDetails.addAll(helperList);

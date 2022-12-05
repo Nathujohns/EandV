@@ -53,10 +53,12 @@ class ViewEventScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    const Text(
-                                      "Event Title :",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                    const Flexible(
+                                      child: Text(
+                                        "Event Title :",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                     Text(
                                       controller.allEvent[index].title,
@@ -70,10 +72,12 @@ class ViewEventScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    const Text(
-                                      "Event Description :",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                    const Flexible(
+                                      child: Text(
+                                        "Event Description :",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                     Text(
                                       controller.allEvent[index].description,
@@ -87,10 +91,32 @@ class ViewEventScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    const Text(
-                                      "Event Date :",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                    const Flexible(
+                                      child: Text(
+                                        "Required Volunteers :",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Text(
+                                      controller.allEvent[index].members
+                                          .toString(),
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    const Flexible(
+                                      child: Text(
+                                        "Event Date :",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                     Text(
                                       controller.allEvent[index].eventDate,

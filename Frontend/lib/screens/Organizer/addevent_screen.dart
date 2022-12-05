@@ -1,9 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:eandv/controller/event_controller.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
 import '../../constants.dart';
+import 'package:eandv/utilities/fieldvalidations.dart';
 
 class AddEventScreen extends StatefulWidget {
   const AddEventScreen({Key? key}) : super(key: key);
@@ -14,7 +16,15 @@ class AddEventScreen extends StatefulWidget {
 
 class _AddEventScreenState extends State<AddEventScreen> {
   final _formKey = GlobalKey<FormState>();
-  Map eventData = {"title": "", "description": ""};
+  Map eventData = {
+    "title": "",
+    "description": ""
+    // // "status": "",
+    // // "organizerId": "",
+    // // "image": "",
+    // "members": "",
+    // "eventDate": ""
+  };
 
   EventController controller = Get.put(EventController());
 
@@ -76,6 +86,28 @@ class _AddEventScreenState extends State<AddEventScreen> {
                 },
               ),
               const SizedBox(height: defaultPadding / 2),
+
+              TextFormField(
+                // keyboardType: TextInputType.number,
+                // textInputAction: TextInputAction.next,
+                decoration: const InputDecoration(
+                  label: Text('Required Volunteers'),
+                ),
+                onSaved: (value) {
+                  eventData['members'] = value;
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Required volunteers is required';
+                  }
+                  if (value.isNotEmpty) {
+                    return isNumeric(value) ? null : "Invalid Number";
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: defaultPadding / 2),
+
               TextFormField(
                 controller:
                     dateController, //editing controller of this TextField

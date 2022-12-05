@@ -103,7 +103,8 @@ router.post("/addevent", async(req, res) => {
     const eventData = {
       title: req.body.title,
       description: req.body.description,
-      eventDate: req.body.eventDate
+      eventDate: req.body.eventDate,
+      members: req.body.members
     };
   
     let addNewEvent = await db.event.create(eventData)
