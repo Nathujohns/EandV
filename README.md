@@ -10,7 +10,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#taco-about-the-project">About The Project</a>
+      <a href="about-the-project">About The Project</a>
       <ul>
         <li><a href="#toolbox-built-with">Built With</a></li>
       </ul>
