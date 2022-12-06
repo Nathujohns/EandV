@@ -27,7 +27,6 @@ class EventController extends GetxController {
       if (response.statusCode == 200) {
         toast("Event added successfully ✅");
         controller.saveEvent(response.body);
-
         Get.back();
       } else {
         toastError(response.body);
@@ -38,7 +37,6 @@ class EventController extends GetxController {
   }
 
   Future<void> editEvent(Map editEventData) async {
-    print(editEventData);
     var url = Uri.parse('${apiBaseUrl}organizer/editevent');
     try {
       final response = await http.post(url, body: editEventData);
@@ -55,7 +53,6 @@ class EventController extends GetxController {
   }
 
   Future<void> editUser(Map editUserData) async {
-    print(editUserData);
     var url = Uri.parse('${apiBaseUrl}users/editUser');
     try {
       final response = await http.post(url, body: editUserData);
