@@ -31,9 +31,9 @@
 </details>
 
 <!-- ABOUT THE PROJECT -->
-## :taco: About The Project
+## About The Project
 
-A simple web application dedicated to order tacos , customer can place an order , track the order on real time and refer back to the history of the orders made . Restaurant gets a list of orders , post updates to the order status and all is synced on real time notification.  
+A simple web application dedicated for people who are interested in building experience by voluteering with organizations and for organizers to hire  volunteers, volunteers can apply for any certain job they are interested in or skilled in.   
 
 ## :toolbox: Built With
 
