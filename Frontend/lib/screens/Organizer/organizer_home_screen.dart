@@ -144,6 +144,7 @@ class _OrganizerHomeScreenState extends State<OrganizerHomeScreen> {
                                     "Event  :  ${controller.allEvent[index].title}",
                                     style: const TextStyle(fontSize: 20),
                                   ),
+                                  Text("data"),
                                   const SizedBox(
                                     height: 10,
                                   ),

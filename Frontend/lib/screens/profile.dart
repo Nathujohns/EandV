@@ -1,12 +1,13 @@
-import 'package:eandv/Editprofile.dart';
 import 'package:eandv/model/login_model.dart';
 import 'package:eandv/screens/Login/login_screen.dart';
+import 'package:eandv/screens/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../controller/event_controller.dart';
+import 'Editprofile.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -41,7 +42,7 @@ class _ProfileState extends State<Profile> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Text(
-          "Profile",
+          "profile",
           style: TextStyle(color: Colors.black),
         ),
         actions: [
@@ -146,7 +147,12 @@ class _ProfileState extends State<Profile> {
                       borderRadius: BorderRadius.circular(15)),
                   backgroundColor: Color(0xFFF5F6F9),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SettingScrren()));
+                },
                 child: Row(
                   children: const [
                     Icon(Icons.settings),

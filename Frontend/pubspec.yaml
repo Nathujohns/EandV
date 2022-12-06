@@ -42,13 +42,26 @@ dependencies:
   intl: ^0.17.0
   curved_navigation_bar: ^1.0.3
   fluttertoast: ^8.1.1
+  flutter_native_splash: ^2.2.16
   flutter_svg: ^1.1.6
   image_picker: ^0.8.6
+  adaptive_theme: ^3.1.1
   
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+flutter_native_splash:
+  color: "#42a5f5"
+  dark_color: "#272727"
+  image: assets/images/volunteer.png
+  dark_mage: assets/images/volunteer.png
+
+  android_12:
+    image: assets/images/volunteer.png
+    dark_mage: assets/images/volunteer.png
+
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -62,7 +75,8 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-  assets:     
+  assets:
+         - assets/
          - assets/images/
          - assets/icons/
          - assets/Organizer.jpeg

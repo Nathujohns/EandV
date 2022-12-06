@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
 
-import 'constants.dart';
-import 'controller/event_controller.dart';
-import 'model/login_model.dart';
+import '../constants.dart';
+import '../controller/event_controller.dart';
+import '../model/login_model.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
