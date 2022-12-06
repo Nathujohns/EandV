@@ -1,3 +1,4 @@
+import 'package:eandv/model/event_model.dart';
 import 'package:flutter/material.dart';
 import 'package:eandv/controller/event_controller.dart';
 import 'package:get/get.dart';
@@ -13,148 +14,93 @@ class EditEventScreen extends StatefulWidget {
 }
 
 class _EditEventScreenState extends State<EditEventScreen> {
-  final _formKey = GlobalKey<FormState>();
-  Map eventData = {
+  final EventController controller = Get.find();
+  EventModel model = EventModel();
+
+  Map editEventData = {
     "title": "",
-    "description": ""
+    "description": "",
     // // "status": "",
     // // "organizerId": "",
     // // "image": "",
-    // "members": "",
+    "members": "",
     // "eventDate": ""
   };
 
-  EventController controller = Get.put(EventController());
+  @override
+  void initState() {
+    GetEventData();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  // EventController controller = Get.put(EventController());
 
   editEvent() {
-    _formKey.currentState!.save();
-    if (_formKey.currentState!.validate()) {
-      controller.addEvent(eventData);
-    }
+    editEventData['id'] = model.id.toString();
+    controller.editEvent(editEventData);
   }
 
   deleteEvent() {
-    controller.deleteEvent('46');
+    controller.deleteEvent(model.id.toString());
   }
 
-  TextEditingController dateController = TextEditingController();
-
-  @override
-  void initState() {
-    dateController.text = ""; //set the initial value of text field
-    super.initState();
+  GetEventData() async {
+    model = await controller.getEvents();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Event'),
+        title: const Text('Edit Events'),
       ),
       body: Form(
-        key: _formKey,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               TextFormField(
-                decoration: const InputDecoration(
-                  label: Text('Event Title'),
+                decoration: InputDecoration(
+                  hintText: model.title.toString(),
                 ),
-                onSaved: (value) {
-                  eventData['title'] = value;
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Event title required';
-                  }
-                  return null;
+                onChanged: (value) {
+                  editEventData['title'] = value;
                 },
               ),
               const SizedBox(height: defaultPadding / 2),
               TextFormField(
-                decoration: const InputDecoration(
-                  label: Text('Event Description'),
+                decoration: InputDecoration(
+                  hintText: model.description.toString(),
                 ),
-                onSaved: (value) {
-                  eventData['description'] = value;
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Event description required';
-                  }
-                  return null;
+                onChanged: (value) {
+                  editEventData['description'] = value;
                 },
               ),
               const SizedBox(height: defaultPadding / 2),
-
               TextFormField(
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
-                decoration: const InputDecoration(
-                  label: Text('Required Volunteers'),
+                decoration: InputDecoration(
+                  hintText: model.members.toString(),
                 ),
-                onSaved: (value) {
-                  eventData['members'] = value;
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Required volunteers is required';
-                  }
-                  if (value.isNotEmpty) {
-                    return isNumeric(value) ? null : "Invalid Number";
-                  }
-                  return null;
+                onChanged: (value) {
+                  editEventData['members'] = value;
                 },
               ),
               const SizedBox(height: defaultPadding / 2),
-
-              TextFormField(
-                controller:
-                    dateController, //editing controller of this TextField
-                decoration: const InputDecoration(
-                    // icon: Icon(Icons.calendar_today), //icon of text field
-                    labelText: "Enter Date" //label text of field
-                    ),
-                readOnly: true, // when true user cannot edit tex
-                onTap: () async {
-                  //when click we have to show the datepicker
-                  DateTime? pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(), //get today's date
-                      firstDate: DateTime(
-                          2000), //DateTime.now() - not to allow to choose before today.
-                      lastDate: DateTime(2101));
-
-                  if (pickedDate != null) {
-                    print(
-                        pickedDate); //get the picked date in the format => 2022-07-04 00:00:00.000
-                    String formattedDate = DateFormat('yyyy-MM-dd').format(
-                        pickedDate); // format date in required form here we use yyyy-MM-dd that means time is removed
-                    print(
-                        formattedDate); //formatted date output using intl package =>  2022-07-04
-                    //You can format date as per your need
-
-                    setState(() {
-                      dateController.text = eventData['eventDate'] =
-                          formattedDate; //set formatted date to TextField value.
-                    });
-                  } else {
-                    print("Date is not selected");
-                  }
-                },
-                validator: (pickedDate) {
-                  if (pickedDate == null || pickedDate.isEmpty) {
-                    return 'Event date is required';
-                  }
-                  return null;
-                },
-              ),
+              // TextFormField(
+              //   decoration: InputDecoration(
+              //     hintText: model.eventDate.toString(),
+              //   ),
+              //   onSaved: (value) {
+              //     editEventData['eventDate'] = value;
+              //   },
+              // ),
+              const SizedBox(height: defaultPadding / 2),
               const SizedBox(
                 height: 20,
               ),
-
               ElevatedButton(
                   onPressed: editEvent, child: const Text("UPDATE EVENT")),
 
@@ -163,15 +109,13 @@ class _EditEventScreenState extends State<EditEventScreen> {
               ),
 
               ElevatedButton(
-                child: const Text('DELETE EVENT'),
                 onPressed: deleteEvent,
                 style: ElevatedButton.styleFrom(
                     primary: Colors.red,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 50, vertical: 20)),
-              ),
-
-              // Add TextFormFields and ElevatedButton here.
+                child: const Text('DELETE EVENT'),
+              ), // Add TextFormFields and ElevatedButton here.
             ],
           ),
         ),

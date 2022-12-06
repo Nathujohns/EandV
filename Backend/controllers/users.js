@@ -60,4 +60,16 @@ router.get("/getUser", async(req, res) => {
 
 })
 
+router.post('/editUser' ,async(req, res) => {
+  
+  let values = {name: req.body.name,email: req.body.email};
+  let condition = { where :{id: req.body.id}}; 
+  
+    await db.user.update(values,condition).then(async () => {}); 
+
+    const user = await db.user.findOne(condition).then(async (updatedUserData) => {
+    res.send(updatedUserData)
+      
+  })
+})
 module.exports = router

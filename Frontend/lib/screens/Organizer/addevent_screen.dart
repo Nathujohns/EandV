@@ -223,6 +223,7 @@ class ImageFromGalleryExState extends State<ImageFromGalleryEx> {
                     preferredCameraDevice: CameraDevice.front);
                 setState(() {
                   _image = File(image.path);
+                  // eventData['image'] = File(image.path);
                   print(_image);
                 });
               },

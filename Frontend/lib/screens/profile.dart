@@ -41,7 +41,7 @@ class _ProfileState extends State<Profile> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Text(
-          "profile",
+          "Profile",
           style: TextStyle(color: Colors.black),
         ),
         actions: [
@@ -71,10 +71,10 @@ class _ProfileState extends State<Profile> {
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(color: Colors.black)),
-                child: const CircleAvatar(
+                child: CircleAvatar(
                   radius: 50.0,
                   backgroundColor: Colors.grey,
-                  backgroundImage: AssetImage("assets/.png"),
+                  backgroundImage: AssetImage("assets/${model.role}.jpeg"),
                 ),
               ),
               const SizedBox(height: 20),

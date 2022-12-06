@@ -36,48 +36,21 @@ router.get('/' , async (req, res) => {
         });
    })
   
-router.post('/status' ,async(req, res) => {
+router.post('/editevent' ,async(req, res) => {
   
-  let values = {status: req.body.status, };
+  let values = {title: req.body.title,description: req.body.description,eventDate: req.body.eventDate,members: req.body.members};
+    
   let condition = { where :{id: req.body.id}}; 
   
-    await db.order.update(values,condition)
-    
-    .then(async (orders) => {
-  
-      req.flash('success', 'Order updated successfully!!!')
-      
-      
-      //Emit
-      const eventEmitter = req.app.get('eventEmitter')
-      eventEmitter.emit('orderUpdated', {id: req.body.id, status: req.body.status})
-  
-      // delete req.session.cart
-      
-      });   
-      
-      db.order.findAll({
-        where: {
-          status: {[sequelize.Op.not]: 'completed'}
-        },
-        order: [['createdAt', 'DESC']],
-        include: [db.user]
-      }).then((orders) => {
-      
-        res.render('restaurant/orders' , {orders})
-  
-      });
+    await db.event.update(values,condition).then(async () => {
+    res.send("Event updated successfully")  
   })
-    
+})
 router.delete('/:eventId', async (req,res) => {
   
-   await db.event.destroy({
-        where: { id: req.params.eventId }
-    }).then(r => {  
-          res.send('Event deleted successfully!!!')
-         
-     });
-  })
+   await db.event.destroy({where: { id: req.params.eventId }}).then(r => {  
+   res.send('Event deleted successfully!!!')});
+})
    
 
 router.post("/addevent", async(req, res) => {
@@ -98,16 +71,9 @@ router.post("/addevent", async(req, res) => {
     await addNewEvent.save()
     .then(async (orders) => {
   
-      res.status(200).send({
-        code: 200,
-        message: "Event added successfully",
-        addedevent: eventData,
-      });
-          
-  })
-  }
-   
-    
+      res.send(addNewEvent);})
+    }
+
   });
   
 

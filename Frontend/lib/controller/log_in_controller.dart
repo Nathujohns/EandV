@@ -1,3 +1,5 @@
+import 'package:eandv/model/event_model.dart';
+import 'package:eandv/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -74,7 +76,6 @@ class LoginController extends GetxController {
     SharedPreferences shared_User = await SharedPreferences.getInstance();
     Login_model _auth = Login_model.fromJson(jsonDecode(response));
     String login = jsonEncode(_auth);
-    print(login);
     shared_User.setString('login', login);
   }
 
@@ -87,6 +88,23 @@ class LoginController extends GetxController {
     }
     var user = Login_model.fromJson(jsonDecode(login!));
     print(user.id);
+  }
+
+  Future<void> editUser(Map editUserData) async {
+    print(editUserData);
+    var url = Uri.parse('${apiBaseUrl}users/editUser');
+    try {
+      final response = await http.post(url, body: editUserData);
+
+      if (response.statusCode == 200) {
+        toast("User updated successfully ✅");
+        Get.to(const Profile());
+      } else {
+        toastError(response.body);
+      }
+    } catch (error) {
+      toastError(error.toString());
+    }
   }
 
   Future<void> LogOut() async {

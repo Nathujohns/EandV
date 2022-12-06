@@ -1,3 +1,4 @@
+import 'package:eandv/model/event_model.dart';
 import 'package:eandv/screens/Login/login_screen.dart';
 import 'package:eandv/screens/Organizer/addevent_screen.dart';
 import 'package:eandv/screens/Organizer/editevent_screen.dart';
@@ -10,6 +11,7 @@ class ViewEventScreen extends StatelessWidget {
   ViewEventScreen({Key? key}) : super(key: key);
 
   final EventController controller = Get.put(EventController());
+  // EventModel model = EventModel();
 
   // signOut() async {
   //   await auth.signOut();
@@ -60,8 +62,7 @@ class ViewEventScreen extends StatelessWidget {
                                     height: 0,
                                   ),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       const Flexible(
                                         child: Text(
@@ -71,16 +72,16 @@ class ViewEventScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        controller.allEvent[index].title,
+                                        controller.allEvent[index].title
+                                            .toString(),
                                         style: const TextStyle(
-                                          fontSize: 20,
+                                          fontSize: 16,
                                         ),
                                       ),
                                     ],
                                   ),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       const Flexible(
                                         child: Text(
@@ -89,17 +90,20 @@ class ViewEventScreen extends StatelessWidget {
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ),
-                                      Text(
-                                        controller.allEvent[index].description,
-                                        style: const TextStyle(
-                                          fontSize: 20,
+                                      Flexible(
+                                        child: Text(
+                                          controller.allEvent[index].description
+                                              .toString(),
+                                          // controller.allEvent[index].description,
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                          ),
                                         ),
                                       ),
                                     ],
                                   ),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       const Flexible(
                                         child: Text(
@@ -111,15 +115,15 @@ class ViewEventScreen extends StatelessWidget {
                                       Text(
                                         controller.allEvent[index].members
                                             .toString(),
+                                        // controller.allEvent[index].members.toString(),
                                         style: const TextStyle(
-                                          fontSize: 20,
+                                          fontSize: 16,
                                         ),
                                       ),
                                     ],
                                   ),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       const Flexible(
                                         child: Text(
@@ -129,9 +133,11 @@ class ViewEventScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        controller.allEvent[index].eventDate,
+                                        controller.allEvent[index].eventDate
+                                            .toString()
+                                            .substring(0, 10),
                                         style: const TextStyle(
-                                          fontSize: 20,
+                                          fontSize: 16,
                                         ),
                                       ),
                                     ],
@@ -140,10 +146,12 @@ class ViewEventScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Expanded(
+                                          flex: 1,
                                           child: Image.network(
-                                              controller.allEvent[index].image,
-                                              fit: BoxFit.fill),
-                                          flex: 1),
+                                              // model.image.toString(),
+                                              controller.allEvent[index].image
+                                                  .toString(),
+                                              fit: BoxFit.fill)),
                                     ],
                                   ),
                                 ],

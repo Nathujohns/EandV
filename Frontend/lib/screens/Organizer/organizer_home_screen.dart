@@ -1,4 +1,3 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:eandv/Screens/Login/components/login_form.dart';
 import 'package:flutter/material.dart';
 import 'package:eandv/screens/Organizer/addevent_screen.dart';
@@ -107,7 +106,7 @@ class _OrganizerHomeScreenState extends State<OrganizerHomeScreen> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 200,
+                      height: 250,
                       child: ListView.builder(
                         itemCount: controller.allEvent.length,
                         scrollDirection: Axis.horizontal,
@@ -115,41 +114,53 @@ class _OrganizerHomeScreenState extends State<OrganizerHomeScreen> {
                           height: 300.0,
                           color: Colors.transparent,
                           child: Container(
-                              height: 100,
-                              width: 200,
+                              height: 250,
+                              width: 250,
                               margin: EdgeInsets.only(left: 20),
                               // padding: EdgeInsets.only(left: 20),
                               decoration: const BoxDecoration(
                                   color: Colors.purple,
                                   borderRadius: BorderRadius.all(
-                                    Radius.circular(40.0),
+                                    Radius.circular(20.0),
                                   )),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Container(
-                                    height: 100,
-                                    width: 300,
-                                    child: Image.asset(
-                                      'assets/images/volunteer.png',
+                                  Flexible(
+                                    child: Container(
+                                      height: 250,
+                                      width: 400,
+                                      child: Image.asset(
+                                        'assets/images/volunteer.png',
+                                      ),
                                     ),
                                   ),
-                                  const SizedBox(
-                                    height: 15,
+                                  // const SizedBox(
+                                  //   height: 10,
+                                  // ),
+                                  // Text(""),
+                                  // ignore: prefer_interpolation_to_compose_strings
+                                  Text(
+                                    "Event  :  ${controller.allEvent[index].title}",
+                                    style: const TextStyle(fontSize: 20),
                                   ),
-                                  Text("Event   : " +
-                                      controller.allEvent[index].title),
                                   const SizedBox(
-                                    height: 15,
+                                    height: 10,
                                   ),
-                                  Text("Date  :" +
-                                      controller.allEvent[index].eventDate),
+                                  // ignore: prefer_interpolation_to_compose_strings
+                                  Text(
+                                    "Event Date  :  ${controller.allEvent[index].eventDate?.substring(0, 10)}",
+                                    style: const TextStyle(fontSize: 20),
+                                  ),
                                   const SizedBox(
-                                    height: 15,
+                                    height: 10,
                                   ),
-                                  Text("Numbers  :" +
-                                      controller.allEvent[index].members
-                                          .toString()),
+                                  // ignore: prefer_interpolation_to_compose_strings
+                                  Text(
+                                      "Required Volunteers :" +
+                                          controller.allEvent[index].members
+                                              .toString(),
+                                      style: const TextStyle(fontSize: 20)),
                                 ],
                               )),
                         ),
