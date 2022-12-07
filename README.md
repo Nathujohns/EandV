@@ -21,7 +21,6 @@
     <li><a href="#space_invader-technologies-used">Technologies Used</a></li>
     <li><a href="#camera-wire-frames">Wire Frames</a></li>
     <li><a href="#camera-wire-frames">ERDs</a></li>
-    <li><a href="#book-route-table">Route Table</a></li>
     <li><a href="#mirror-post-project-reflection">Post-Project Reflection</a></li>
     <li><a href="#information_source-sources-used">Sources Used</a></li>  
     
