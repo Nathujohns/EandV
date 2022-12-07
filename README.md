@@ -153,7 +153,16 @@ This section should list any major frameworks/libraries used to bootstrap your p
 ---
 
 ## :mirror: Post-Project Reflection
-Prior the day presenting the project everything was working fine , i did a small change which dragged to more changes and i've ended with breaking some functionality , this was a lesson i learned that to always take a back up and commiting frequently .
+  
+Our group decided to challenge ourselves by programming an application using a language that we did not study during the software engineering course, which is called “Flutter”. 
+  
+Flutter is a mobile app development language created by Alphabet Inc. (Google previously), this language supports both IOS and Android Operating Systems.
+  
+It has been a great experience filled with new skills and knowledge gained.
+Our main issue was that we only had one working week to figure out how to utilize Flutter in order to create our application. We managed to surpass every obstacle by doing the required research, in addition to the support we got from our instructors, Mr. Kareem and Mr. Alex.
+  
+Eventually, we managed to create an application that might not be perfect, but we consider it as an amazing stepping-stone, and we are confident that we can improve, and publish it.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
