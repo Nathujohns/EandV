@@ -84,10 +84,14 @@ This section should list any major frameworks/libraries used to bootstrap your p
 ## :wave: Approach taken
   
 1.ERDS.
+  
+   ![image](https://user-images.githubusercontent.com/113826663/206164762-3d38604e-e288-43eb-a9bf-3771667c4f73.png)
 
 2.Wireframes.
 
 3.User stories .
+  
+   ![image](https://user-images.githubusercontent.com/113826663/206166031-deba15d0-ca63-4fbf-9a52-f16ddca8f274.png)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
